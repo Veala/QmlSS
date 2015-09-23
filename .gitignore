@@ -1,0 +1,3 @@
+#ignore /SVSignals/*.user, autosave
+/SVSignals/*.user
+/SVSignals/*.autosave
