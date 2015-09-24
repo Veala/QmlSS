@@ -9,6 +9,13 @@ Rectangle {
         text.text = msg
     }
 
+    Component.onCompleted: {
+        console.log("completed2")
+    }
+    Component.onDestruction: {
+        console.log("destructed2")
+    }
+
     Text {
         id:text
         font.pixelSize: 20
@@ -17,6 +24,7 @@ Rectangle {
     }
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
         onClicked: {
             if (mouse.button == Qt.LeftButton)  stack.toPage1()
             else if (mouse.button == Qt.RightButton)  signalFuck2("Crayola")

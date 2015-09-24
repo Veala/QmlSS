@@ -9,6 +9,13 @@ Rectangle {
         text.text = msg
     }
 
+    Component.onCompleted: {
+        console.log("completed1")
+    }
+    Component.onDestruction: {
+        console.log("destructed1")
+    }
+
     Text {
         id:text
         font.pixelSize: 20
@@ -17,9 +24,15 @@ Rectangle {
     }
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
         onClicked: {
-            if (mouse.button == Qt.LeftButton)  stack.toPage2()
-            else if (mouse.button == Qt.RightButton)  signalFuck1("LSD")
+            if (mouse.button == Qt.LeftButton) {
+                console.log("left")
+                stack.toPage2()
+            } else if (mouse.button == Qt.RightButton) {
+                console.log("right")
+                signalFuck1("LSD")
+            }
         }
     }
 }
