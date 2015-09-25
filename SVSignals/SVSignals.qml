@@ -10,27 +10,39 @@ ApplicationWindow {
     StackView {
         id: stack
         anchors.fill: parent
-        //initialItem: lPage1.item
-        initialItem: Qt.resolvedUrl("Page1.qml")
+        initialItem: lPage1.item
+        //initialItem: Qt.resolvedUrl("Page1.qml")
         focus: true
         signal toPage1
         signal toPage2
 
         Loader {
             id: lPage1
-            //source: Qt.resolvedUrl("Page1.qml")
+            source: Qt.resolvedUrl("Page1.qml")
             //source: "Page1.qml"
         }
         Loader {
             id: lPage2
             //source: Qt.resolvedUrl("Page2.qml")
+            source: ""
         }
         Connections {
             target: lPage1.item
             onSignalFuck1: {
                 console.log(msg)
+                lPage2.source = Qt.resolvedUrl("Page2.qml")
                 lPage1.item.textChange1(msg)
                 lPage2.item.textChange2(msg)
+                //lPage2.source = Qt.resolvedUrl("Page2.qml")
+            }
+        }
+        Connections {
+            target: lPage2.item
+            onSignalFuck2: {
+                console.log(msg)
+                //lPage1.item.textChange1(msg)
+                lPage2.item.textChange2(msg)
+                lPage1.source = ""
             }
         }
 
@@ -40,13 +52,13 @@ ApplicationWindow {
                          }
         onToPage1: {
             //lPage1.source = Qt.resolvedUrl("Page1.qml")
-            //stack.push(lPage1.item)
-            stack.push(Qt.resolvedUrl("Page1.qml"))
+            stack.push(lPage1.item)
+            //stack.push(Qt.resolvedUrl("Page1.qml"))
         }
         onToPage2: {
             //lPage2.source = Qt.resolvedUrl("Page2.qml")
-            //stack.push(lPage2.item)
-            stack.push(Qt.resolvedUrl("Page2.qml"))
+            stack.push(lPage2.item)
+            //stack.push(Qt.resolvedUrl("Page2.qml"))
         }
     }
 }
